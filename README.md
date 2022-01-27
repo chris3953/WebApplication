@@ -16,7 +16,7 @@
 | Student Name | Student Email | GitHub Username |
 |    :---:     |     :---:     |     :---:       |
 | member1      | bsoriano1@mail.sfsu.edu  | b-ts-o    |
-| member2      |               |                 |
+| member2      | cmcglothen@mail.sfsu.edu | chris3953 |
 | member3      |               |                 |
 | member4      |               |                 |
 | member5      |               |                 |
