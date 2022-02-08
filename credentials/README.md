@@ -8,16 +8,25 @@
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
 1. Server URL or IP
+    The pubic IP is not static. Can be retrieved when instance is launched. 
 2. SSH username
+    ubuntu
 3. SSH password or key.
     <br> If a ssh key is used please upload the key to the credentials folder.
+    keypair_EC2_jeff0202.pem
 4. Database URL or IP and port used.
     <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
+    The pubic IP is not static.
 5. Database username
+    cmcglothen@mail.sfsu.edu
 6. Database password
+    Orange3953!
 7. Database name (basically the name that contains all your tables)
+    csc648
 8. Instructions on how to use the above information.
-
+    First, log into AWS dash board with account:cmcglothen@mail.sfsu.edu and pwd:Orange3953!
+    Seoncond, launch the instance and obtain the public IP
+    Last, ssh with keypair_EC2_jeff0202.pem, public IP and username:ubuntu
 # Most important things to Remember
 ## These values need to kept update to date throughout the semester. <br>
 ## <strong>Failure to do so will result it points be deducted from milestone submissions.</strong><br>
