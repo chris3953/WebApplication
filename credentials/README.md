@@ -11,8 +11,11 @@
 WORKBENCH LOGIN: 
 *** Standard TCP/IP
 Endpoint/Hostname: csc648.cqkov7pmg4ge.us-east-1.rds.amazonaws.com
+
 Port: 3306 
+
 UserName: admin
+
 Password: sanfrancisco
 
 
