@@ -7,6 +7,15 @@
 
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
+
+WORKBENCH LOGIN: 
+*** Standard TCP/IP
+Endpoint/Hostname: csc648.cqkov7pmg4ge.us-east-1.rds.amazonaws.com
+Port: 3306 
+UserName: admin
+Password: sanfrancisco
+
+
 1. Server URL or IP  
     The pubic IP is not static. Can be retrieved when instance is launched. 
 2. SSH username  
