@@ -21,6 +21,9 @@ UserName: admin
 Password: sanfrancisco
 
 
+Application Link: ec2-3-82-174-225.compute-1.amazonaws.com:80
+
+
 1. Server URL or IP  
     The pubic IP is not static. Can be retrieved when instance is launched. 
 2. SSH username  
