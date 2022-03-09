@@ -7,64 +7,40 @@
 
     </head>
     
-     <body>
+    <body>
+      <div class = "log-div"> 
+     <h1 id = "item-count">LinkedSF</h1>
+      </div>
+      
+      <a href="CompanyRegistration.html">
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary mb-2">
+              Create Company Account
+          </button> 
+        </div> 
+      </a>
 
-     <div class="header">
-      <h1>Software Engineering Class SFSU</h1>
-      <p class="fw-bold mb-0 mt-0">Spring 2022</p>
-      <p class="fw-bold mb-0 mt-0">Section 3</p>
-      <p class="fw-bold mb-0 mt-0">Team 3</p>
-     </div>
+      <a href="StudentRegistration.html">
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary mb-2">
+              Create Student Account
+          </button> 
+        </div> 
+      </a>
 
-     <div class="log-div">
-        <a href="Christian.html">
-          <div class="d-grid">
-            <button type="submit" class="btn btn-primary mb-2">
-                Christian's Page
-            </button> 
-          </div> 
-        </a>
-  
-        <a href="Jeff.html">
-          <div class="d-grid">
-            <button button type="submit" class="btn btn-primary mb-2">
-                Jeff's Page
-            </button>
-          </div> 
-        </a>
-  
-        <a href="Dominique.html">
-          <div class="d-grid">
-            <button button type="submit" class="btn btn-primary mb-2">
-                Dominique's Page
-            </button>
-          </div>
-        </a>
-  
-        <a href="Bridget.html">
-          <div class="d-grid">
-            <button button type="submit" class="btn btn-primary mb-2">
-                Bridget's Page
-            </button>
-          </div>  
-        </a>
-  
-        <a href="Justin.html">
-          <div class="d-grid">
-            <button button type="submit" class="btn btn-primary mb-2">
-                Justin's Page
-            </button>
-          </div>  
-        </a>
-  
-        <a href="Richard.html">
-          <div class="d-grid">
-            <button button type="submit" class="btn btn-primary mb-2"> 
-              Richard's Page
-          </button>  
-          </div>
-        </a>
-     </div>
-
-    </body>
+      <form  method="post">
+				<label for="username">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="Company_Username" placeholder="Username" id="username" required>
+				<label for="password">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="Password" placeholder="Password" id="password" required>
+				<div class="msg">{{ msg }}</div>
+				<input type="submit" value="Login">
+			</form>
+		</div>
+         
+     </body>
 </html>

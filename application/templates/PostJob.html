@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobPost</title>
+</head>
+<body>
+    <h1> Create JobPost</h1>
+    <form class="example" method="post" action="">
+        <input type="text" placeholder="Job Title" name="Job_Title">
+        <label for = "Job_Field">Select Field Of Work</label>
+        <select name = "Job_Field" id= "Job_Field"> 
+           <option value = "Iot">Iot</option>
+           <option value = "AI/Machine Learning">AI/Machine Learning</option>
+           <option value = "5G">5G</option>
+           <option value = "RPA">RPA</option>
+           <option value = "Edge Computing">Edge Computing</option>
+           <option value = "Quantum Computing">Quantum Computing</option>
+           <option value = "VR/Augmented">VR/Augmented</option>
+           <option value = "Blockchain">Blockchain</option>
+           <option value = "Cyber Security">Cyber Security</option>
+        </select>
+        <br>
+        <input type="text" placeholder="Job_Description" name="Job_Description">
+        <br>
+        <input type="text" placeholder="Job_Skills" name="Job_Skills">
+        <br>
+        <input type="text" placeholder="Job_Pay" name="Job_Pay">
+        <input type="text" placeholder="Job_Street_Address" name="Job_Street_Address">
+        <input type="text" placeholder="Job_City" name="Job_City">
+        <input type="text" placeholder="Job_State" name="Job_State">
+        <br>
+        <button type="submit" <i>Create Job Post</i></button>
+        <br>
+        <input type="button" value="Go back!" onclick="history.back()">
+    </form>
+</body>
+</html>
