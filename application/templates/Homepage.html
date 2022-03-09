@@ -1,63 +1,46 @@
 <html>
      <head> 
     <title>HomePage</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     </head>
     
-     <body>
+    <body>
+      <div class = "log-div"> 
+     <h1 id = "item-count">LinkedSF</h1>
+      </div>
+      
+      <a href="CompanyRegistration.html">
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary mb-2">
+              Create Company Account
+          </button> 
+        </div> 
+      </a>
 
-     <h1>Software Engineering Class SFSU</h1>
-     
-     
-     <a href="Christian.html">
-       <button>
-           Christian's Page
-       </button>  
-     </a>
+      <a href="StudentRegistration.html">
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary mb-2">
+              Create Student Account
+          </button> 
+        </div> 
+      </a>
 
-     <br>
-
-     <a href="Jeff.html">
-      <button>
-          Jeff's Page
-      </button>  
-    </a>
-
-      <br>
-
-    <a href="Dominique.html">
-      <button>
-          Dominique's Page
-      </button>  
-    </a>
-
-    <br>
-
-    <a href="Bridget.html">
-      <button>
-          Bridget's Page
-      </button>  
-    </a>
-
-     <br>
-
-    <a href="Justin.html">
-      <button>
-          Justin's Page
-      </button>  
-    </a>
-
-    <br>
-
-    <a href="Richard.html">
-      <button>
-          Richard's Page
-      </button>  
-    </a>
-
-
-    </body>
-
-
-
+      <form  method="post">
+				<label for="username">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="Company_Username" placeholder="Username" id="username" required>
+				<label for="password">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="Password" placeholder="Password" id="password" required>
+				<div class="msg">{{ msg }}</div>
+				<input type="submit" value="Login">
+			</form>
+		</div>
+         
+     </body>
 </html>
