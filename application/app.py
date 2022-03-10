@@ -52,7 +52,7 @@ def CompanyRegister():
     return render_template("CompanyRegistration.html")
 
 @app.route('/StudentRegistration.html', methods = ['GET', 'POST'])
-def StudentRegistartion():
+def StudentRegistration():
     if request.method == "POST":
         First_Name = request.form['First_Name'] 
         Last_Name = request.form['Last_Name'] 
