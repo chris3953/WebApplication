@@ -22,7 +22,7 @@ def Home():
         cursor.execute('SELECT * FROM Company WHERE Company_Username = %s AND Password = %s', (Company_Username, Password,))
         Company_account = cursor.fetchone()
         if Company_account:
-            session['loggedin'] = True
+            session['loggedin'] = True 
             session['id'] = Company_account[0]
             return redirect('CompanyHomePage.html')
         else: 
@@ -52,7 +52,7 @@ def CompanyRegister():
     return render_template("CompanyRegistration.html")
 
 @app.route('/StudentRegistration.html', methods = ['GET', 'POST'])
-def StudentRegistartion():
+def StudentRegistration():
     if request.method == "POST":
         First_Name = request.form['First_Name'] 
         Last_Name = request.form['Last_Name'] 
@@ -76,7 +76,7 @@ def PostJob():
         Job_State = request.form['Job_State']
         User_Id = session['id']
         Job_Field = request.form['Job_Field']
-        cursor.execute("INSERT INTO JobPost (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, FK_Companyid, Job_Field) Values (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, User_Id, Job_Field))
+        cursor.execute("INSERT INTO JobPost (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Adress, Job_City, Job_State, FK_Companyid, Job_Field) Values (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, User_Id, Job_Field))
         conn.commit()
     return render_template("PostJob.html")
 
