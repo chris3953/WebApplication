@@ -23,6 +23,7 @@ def Home():
         Company_account = cursor.fetchone()
         if Company_account:
             session['loggedin'] = True
+            session['id'] = Company_account[0]
             return redirect('CompanyHomePage.html')
         else: 
             msg = 'Incorrect Username/Password'  
@@ -73,8 +74,9 @@ def PostJob():
         Job_Street_Address = request.form['Job_Street_Address']
         Job_City = request.form['Job_City']
         Job_State = request.form['Job_State']
+        User_Id = session['id']
         Job_Field = request.form['Job_Field']
-        cursor.execute("INSERT INTO JobPost (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, Job_Field) Values (%s, %s, %s, %s, %s, %s, %s, %s)", (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, Job_Field))
+        cursor.execute("INSERT INTO JobPost (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, FK_Companyid, Job_Field) Values (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, User_Id, Job_Field))
         conn.commit()
     return render_template("PostJob.html")
 
