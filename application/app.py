@@ -80,13 +80,25 @@ def PostJob():
         conn.commit()
     return render_template("PostJob.html")
 
+@app.route('/StudentHomePage.html', methods=['GET', 'POST'])
+def SearchJob():
+    if request.method == "POST":
+        Job_Field = request.form['Job_Field']
+        Search_Value = request.form['Search']
+        cursor.execute('SELECT * FROM JobPost WHERE Job_Title LIKE %s AND Job_Field = %s', ('%' + Search_Value + '%', Job_Field,))
+        conn.commit()
+        data = cursor.fetchall()
+        # all in the search box will return all the tuples
+        if len(data) == 0 and Search_Value == 'all': 
+            cursor.execute("SELECT * FROM JobPost")
+            conn.commit()
+            data = cursor.fetchall()
+        return render_template('jobs.html', data=data)
+    return render_template("StudentHomePage.html")
+
 @app.route('/CompanyHomePage.html')
 def CompanyHome():
     return render_template("CompanyHomePage.html")
-
-@app.route('/StudentHomePage.html')
-def StudentHome():
-    return render_template("StudentHomePage.html")
 
 if __name__ == '__main__':
     app.debug = True
