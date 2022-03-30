@@ -7,6 +7,15 @@
     <title>Student Page</title>
 </head>
 <body>
+
+  <div style="text-align: right;">
+    <a href="/logout">
+        <button type="button" style="height: 30px">Logout</button>
+    </a>
+    <hr>
+</div>
+
+
     <h1>Student Page</h1>
     <form method="POST">
         <input class="form-control me-2" name="Search" id="Search" type="search" placeholder="Search" aria-label="Search">
@@ -23,6 +32,19 @@
        </select>
         <button class="btn btn-outline-secondary" type="submit">Button</button>
       </form>
-      
+
+      <br>
+
+      <center>
+        {% for item in data %}
+         <table>
+            <tr>
+                <td>{{item[1]}} {{item[2]}} {{item[3]}} {{item[4]}} {{item[5]}} {{item[6]}} {{item[7]}} {{item[8]}} {{item[9]}}</td>
+                <br>
+            </tr>
+         </table>
+        {% endfor %}
+     </center>
+
 </body>
 </html>

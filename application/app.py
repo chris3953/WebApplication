@@ -6,12 +6,14 @@ app.secret_key = "SFSU"
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'Orange3953!'
 app.config['MYSQL_DATABASE_DB'] = 'LinkedSF'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'                                                    
 
 mysql = MySQL()
 mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
+
+
 
 @app.route('/', methods = ['GET', 'POST'] )
 def Home():
@@ -85,20 +87,30 @@ def SearchJob():
     if request.method == "POST":
         Job_Field = request.form['Job_Field']
         Search_Value = request.form['Search']
-        cursor.execute('SELECT * FROM JobPost WHERE Job_Title LIKE %s AND Job_Field = %s', ('%' + Search_Value + '%', Job_Field,))
-        conn.commit()
-        data = cursor.fetchall()
-        # all in the search box will return all the tuples
-        if len(data) == 0 and Search_Value == 'all': 
+        if Search_Value == 'all': 
             cursor.execute("SELECT * FROM JobPost")
             conn.commit()
             data = cursor.fetchall()
-        return render_template('jobs.html', data=data)
+
+        else: 
+            cursor.execute('SELECT * FROM JobPost WHERE Job_Title LIKE %s AND Job_Field = %s', ('%' + Search_Value + '%', Job_Field,))
+            conn.commit()
+            data = cursor.fetchall()
+        # all in the search box will return all the tuples
+        return render_template('StudentHomePage.html', data=data)
     return render_template("StudentHomePage.html")
 
-@app.route('/CompanyHomePage.html')
+@app.route('/CompanyHomePage.html' , methods=['GET', 'POST'])
 def CompanyHome():
-    return render_template("CompanyHomePage.html")
+    cursor.execute('SELECT * FROM JobPost WHERE FK_Companyid = %s', (session['id']))
+    data = cursor.fetchall()
+    return render_template("CompanyHomePage.html", data = data)
+
+@app.route('/logout')
+def logout():
+    session.pop('loggedin', None)
+    session.pop('id', None)
+    return redirect('/')
 
 if __name__ == '__main__':
     app.debug = True

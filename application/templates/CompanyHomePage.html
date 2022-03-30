@@ -7,6 +7,15 @@
     <title>CompanyHomePage</title>
 </head>
 <body>
+
+  <div style="text-align: right;">
+    <a href="/logout">
+        <button type="button" style="height: 30px">Logout</button>
+    </a>
+        <hr>
+  </div>
+
+
     <a href="PostJob.html">
         <div class="d-grid">
           <button type="submit" class="btn btn-primary mb-2">
@@ -14,5 +23,16 @@
           </button> 
         </div> 
       </a>
+
+      <div class="container">
+
+        <p>Your Companies Posts:</p>
+        <ul>
+          {% for n in data %}
+          <li>{{n[1]}} {{n[2]}} {{n[3]}} {{n[4]}} {{n[5]}} {{n[6]}} {{n[7]}} {{n[8]}} {{n[9]}}</li>
+          <br>
+          {% endfor %}
+        </ul>
+      </div>
 </body>
 </html>
