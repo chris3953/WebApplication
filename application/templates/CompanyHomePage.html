@@ -24,15 +24,23 @@
         </div> 
       </a>
 
-      <div class="container">
-
+      <div>
         <p>Your Companies Posts:</p>
-        <ul>
-          {% for n in data %}
-          <li>{{n[1]}} {{n[2]}} {{n[3]}} {{n[4]}} {{n[5]}} {{n[6]}} {{n[7]}} {{n[8]}} {{n[9]}}</li>
-          <br>
-          {% endfor %}
-        </ul>
-      </div>
+        <br>
+        {% for n in data %}
+            <div style="border: double;">
+               <p>Job Title: {{n[1]}}</p>
+               <p>Description: {{n[2]}}</p>
+               <p>Required Skills: {{n[3]}}</p>
+               <p>Pay/Wages: {{n[4]}}</p>
+               <p>Address: {{n[5]}}</p>
+               <p>City: {{n[6]}}</p>
+               <p>State: {{n[7]}}</p>
+               <p>Field of Work: {{n[9]}}</p>
+               <button type="button" style="height: 30px">Delete</button>
+            </div>
+            <br>
+        {% endfor %}
+        </div>
 </body>
 </html>
