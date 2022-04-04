@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Page</title>
+    
+
 </head>
 <body>
 
@@ -35,16 +37,24 @@
 
       <br>
 
-      <center>
+      
+        <div>
         {% for item in data %}
-         <table>
-            <tr>
-                <td>{{item[1]}} {{item[2]}} {{item[3]}} {{item[4]}} {{item[5]}} {{item[6]}} {{item[7]}} {{item[8]}} {{item[9]}}</td>
-                <br>
-            </tr>
-         </table>
+            <div style="border: double;">
+               <p>Job Title: {{item[1]}}</p>
+               <p>Description: {{item[2]}}</p>
+               <p>Required Skills: {{item[3]}}</p>
+               <p>Pay/Wages: {{item[4]}}</p>
+               <p>Address: {{item[5]}}</p>
+               <p>City: {{item[6]}}</p>
+               <p>State: {{item[7]}}</p>
+               <p>Field of Work: {{item[9]}}</p>
+               <button type="button" style="height: 30px">Apply</button>
+            </div>
+            <br>
         {% endfor %}
-     </center>
+        </div>
+     
 
 </body>
 </html>
