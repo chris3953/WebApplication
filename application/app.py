@@ -3,6 +3,8 @@ from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
 
 
+
+
 app = Flask(__name__)
 
 app.secret_key = "SFSU"
@@ -136,7 +138,7 @@ def ShowApplicants():
 
 @app.route('/ShowResume.html', methods=['GET', 'POST'])
 def ShowResume():
-    cursor.execute('SELECT * FROM JobSeeker, Applied WHERE idJobSeeker = Fk_JobSeekerid')
+    cursor.execute('SELECT Resume FROM JobSeeker, Applied WHERE idJobSeeker = Fk_JobSeekerid')
     data = cursor.fetchone()
     return render_template("ShowResume.html", data = data)
 
