@@ -7,9 +7,9 @@
     <br>
     {% for n in data %}
         <div style="border: double;">
-           <p>Job seekerid: {{n[2]}}</p>
+           <p>Job seekerid: {{n[2]}} {{n[3]}}</p>
            <form method="POST">
-            <input type="hidden" name="buttonID" value="{{n[2]}}"> 
+            <input type="hidden" name="buttonID" value="{{n[3]}}"> 
             <input type="submit" style="height: 30px" name = "submit" value="see_resume">
            </form>
         </div>
