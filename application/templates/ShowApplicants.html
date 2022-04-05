@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<h1>Applicants</h1>
+
+<div>
+    <p>Your Job Applicants:</p>
+    <br>
+    {% for n in data %}
+        <div style="border: double;">
+           <p>Job seekerid: {{n[2]}}</p>
+           <form method="POST">
+            <input type="hidden" name="buttonID" value="{{n[2]}}"> 
+            <input type="submit" style="height: 30px" name = "submit" value="see_resume">
+           </form>
+        </div>
+        <br>
+    {% endfor %}
+    </div>

@@ -21,23 +21,23 @@
     <h1>Student Page</h1>
     <form method="POST">
         <input class="form-control me-2" name="Search" id="Search" type="search" placeholder="Search" aria-label="Search">
-        <select class="form-select" name="Job_Field" id="Job_Field"> 
-          <option value = "Iot">Iot</option>
-          <option value = "AI/Machine Learning">AI/Machine Learning</option>
-          <option value = "5G">5G</option>
-          <option value = "RPA">RPA</option>
-          <option value = "Edge Computing">Edge Computing</option>
-          <option value = "Quantum Computing">Quantum Computing</option>
-          <option value = "VR/Augmented">VR/Augmented</option>
-          <option value = "Blockchain">Blockchain</option>
-          <option value = "Cyber Security">Cyber Security</option>
-       </select>
-        <button class="btn btn-outline-secondary" type="submit">Button</button>
-      </form>
+        <select class="form-select" name="Job_Field" id="Job_Field">
+            <option value="Iot">Iot</option>
+            <option value="AI/Machine Learning">AI/Machine Learning</option>
+            <option value="5G">5G</option>
+            <option value="RPA">RPA</option>
+            <option value="Edge Computing">Edge Computing</option>
+            <option value="Quantum Computing">Quantum Computing</option>
+            <option value="VR/Augmented">VR/Augmented</option>
+            <option value="Blockchain">Blockchain</option>
+            <option value="Cyber Security">Cyber Security</option>
+        </select>
+        <input name = "submit" value="submit_search" type="submit">
+    </form>  
 
       <br>
 
-      
+    
         <div>
         {% for item in data %}
             <div style="border: double;">
@@ -49,11 +49,15 @@
                <p>City: {{item[6]}}</p>
                <p>State: {{item[7]}}</p>
                <p>Field of Work: {{item[9]}}</p>
-               <button type="button" style="height: 30px">Apply</button>
+               <form method="POST"> 
+                <input type="hidden" name="buttonID" value="{{item[0]}}">
+                <input type="submit" style="height: 30px" name = "submit" value="submit_apply">
+               </form>   
             </div>
             <br>
         {% endfor %}
         </div>
+    
      
 
 </body>

@@ -38,6 +38,10 @@
                <p>State: {{n[7]}}</p>
                <p>Field of Work: {{n[9]}}</p>
                <button type="button" style="height: 30px">Delete</button>
+               <form method="POST">
+                <input type="hidden" name="buttonID" value="{{n[0]}}"> 
+                <input type="submit" style="height: 30px" name = "submit" value="see_applicants">
+               </form>
             </div>
             <br>
         {% endfor %}
