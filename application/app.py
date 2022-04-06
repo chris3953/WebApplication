@@ -1,6 +1,10 @@
 #from crypt import methods
 from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
+
+
+
+
 app = Flask(__name__)
 
 app.secret_key = "SFSU"
@@ -128,14 +132,14 @@ def ShowApplicants():
         session['JobSeekerid'] = buttonID
         return redirect(url_for("ShowResume"))
 
-    cursor.execute('SELECT * FROM applied WHERE FK_Postid = %s', (int(session["JobPostid"])))
+    cursor.execute('SELECT * FROM JobSeeker, Applied WHERE idJobSeeker = Fk_JobSeekerid')
     data = cursor.fetchall()
     return render_template("ShowApplicants.html", data = data)
 
 @app.route('/ShowResume.html', methods=['GET', 'POST'])
 def ShowResume():
-    cursor.execute('SELECT Resume FROM jobseeker WHERE idJobSeeker = %s', (session['JobSeekerid']))
-    data = cursor.fetchall()
+    cursor.execute('SELECT Resume FROM JobSeeker, Applied WHERE idJobSeeker = Fk_JobSeekerid')
+    data = cursor.fetchone()
     return render_template("ShowResume.html", data = data)
 
 @app.route('/logout')
