@@ -16,7 +16,7 @@
     <div class="container-fluid">
       <span class="navbar-brand">LinkedSF</span>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a href="CompanyRegistration.html">
+        <a href="/logout">
           <div class="/logout">
             <button type="button" class="btn btn-link">
                 Logout
@@ -42,32 +42,38 @@
             <option value="Blockchain">Blockchain</option>
             <option value="Cyber Security">Cyber Security</option>
         </select>
-        <input name = "submit" value="submit_search" type="submit">
+        <div class = "d-grid gap-2 d-md-flex justify-content-md-end"> 
+          <button type="submit"  name="submit" value= "submit_search" class="btn btn-outline-danger" >Search</button>
+           </div>
+        
     </form>  
 
       <br>
 
-    
-        <div>
+      <div class="card-div">
+        <h3>Job Postings:</h3>
         {% for item in data %}
-            <div style="border: double;">
-               <p>Job Title: {{item[1]}}</p>
-               <p>Description: {{item[2]}}</p>
-               <p>Required Skills: {{item[3]}}</p>
-               <p>Pay/Wages: {{item[4]}}</p>
-               <p>Address: {{item[5]}}</p>
-               <p>City: {{item[6]}}</p>
-               <p>State: {{item[7]}}</p>
-               <p>Field of Work: {{item[9]}}</p>
-               <form method="POST"> 
-                <input type="hidden" name="buttonID" value="{{item[0]}}">
-                <input type="submit" style="height: 30px" name = "submit" value="submit_apply">
-               </form>   
+            <div class="card-body shadow">
+               <h5>{{item[1]}}</h5>
+               <p>Field Of Work: {{item[9]}}
+                 <br>Location: {{item[5]}} {{item[6]}}, {{item[7]}}
+                 <br>Description: {{item[2]}}
+                 <br>Job Skills: {{item[3]}}
+                 <br>Wages: {{item[4]}}
+               </p>
+               
+               
+
+               <form method="POST">
+                 <div class = "d-grid gap-2 d-md-flex justify-content-md-end"> 
+                <input type="hidden" name="buttonID" value="{{item[0]}}"> 
+                <button type="submit" name = "submit" value="submit_apply" class="btn btn-outline-danger" >Apply</button>
+                 </div>
+               </form> 
             </div>
-            <br>
         {% endfor %}
         </div>
-    
+        
      
 
 </body>

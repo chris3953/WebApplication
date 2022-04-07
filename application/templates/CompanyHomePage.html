@@ -36,27 +36,36 @@
       </a>
 
       <div class="card-div">
-        <h3>Posted Jobs</h3>
+        <h3>Posted Jobs:</h3>
         {% for n in data %}
             <div class="card-body shadow">
                <h5>{{n[1]}}</h5>
-               <p>Description: {{n[2]}}
+               <p>Field Of Work: {{n[9]}}
                  <br>Location: {{n[5]}} {{n[6]}}, {{n[7]}}
-                 <br>{{n[9]}}
+                 <br>Description: {{n[2]}}
+                 <br>Job Skills: {{n[3]}}
+                 <br>Wages: {{n[4]}}
                </p>
                <!-- <p>{{n[5]}}</p> -->
                <!-- <p>{{n[5]}}
                  {{n[6]}}, {{n[7]}}</p>
                <p>{{n[9]}}</p> -->
+             
+               
 
-               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="button" class="btn btn-outline-danger" >Delete</button>
-              </div>
+               <form method="POST">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <button type="button" class="btn btn-outline-danger" >Delete Job Post</button>
+                </div>
+                 
+                 <br>
+                 <br> 
 
-               <!-- <form method="POST">
+                 <div class = "d-grid gap-2 d-md-flex justify-content-md-end"> 
                 <input type="hidden" name="buttonID" value="{{n[0]}}"> 
-                <input type="submit" style="height: 30px" name = "submit" value="see_applicants">
-               </form> -->
+                <button type="submit" class="btn btn-outline-danger" >Show Applicants</button>
+                 </div>
+               </form> 
             </div>
         {% endfor %}
         </div>

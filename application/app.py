@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 app.secret_key = "SFSU"
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = '2112'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'Orange3953!'
 app.config['MYSQL_DATABASE_DB'] = 'LinkedSF'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'                                                    
 
@@ -96,7 +96,7 @@ def SearchJob():
         if request.form['submit'] == "submit_search":
             Job_Field = request.form['Job_Field']
             Search_Value = request.form['Search']
-            if Search_Value == 'all': 
+            if Search_Value == '': 
                 cursor.execute("SELECT * FROM JobPost")
                 conn.commit()
                 data = cursor.fetchall()
