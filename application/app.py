@@ -1,9 +1,7 @@
 #from crypt import methods
+import base64
 from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
-
-
-
 
 app = Flask(__name__)
 
@@ -139,7 +137,7 @@ def ShowApplicants():
 @app.route('/ShowResume.html', methods=['GET', 'POST'])
 def ShowResume():
     cursor.execute('SELECT Resume FROM JobSeeker, Applied WHERE idJobSeeker = Fk_JobSeekerid')
-    data = cursor.fetchone()
+    data = cursor.fetchall()
     return render_template("ShowResume.html", data = data)
 
 @app.route('/logout')
