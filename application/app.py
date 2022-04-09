@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 app.secret_key = "SFSU"
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'Orange3953!'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'root66730'
 app.config['MYSQL_DATABASE_DB'] = 'LinkedSF'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'                                                    
 
@@ -130,13 +130,13 @@ def ShowApplicants():
         session['JobSeekerid'] = buttonID
         return redirect(url_for("ShowResume"))
 
-    cursor.execute('SELECT * FROM JobSeeker, Applied WHERE idJobSeeker = Fk_JobSeekerid')
+    cursor.execute('SELECT * FROM JobSeeker, Applied WHERE Fk_JobSeekerid = idjobseeker AND FK_Postid = %s', session['JobPostid'])
     data = cursor.fetchall()
     return render_template("ShowApplicants.html", data = data)
 
 @app.route('/ShowResume.html', methods=['GET', 'POST'])
 def ShowResume():
-    cursor.execute('SELECT Resume FROM JobSeeker, Applied WHERE idJobSeeker = Fk_JobSeekerid')
+    cursor.execute('SELECT Resume FROM JobSeeker WHERE idJobSeeker = %s', (session['JobSeekerid']))
     data = cursor.fetchall()
     return render_template("ShowResume.html", data = data)
 
