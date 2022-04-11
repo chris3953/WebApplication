@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request, redirect, session
+#from crypt import methods
+import base64
+from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
+
 app = Flask(__name__)
 
 app.secret_key = "SFSU"
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'Orange3953!'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'root66730'
 app.config['MYSQL_DATABASE_DB'] = 'LinkedSF'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'                                                    
 
@@ -36,6 +39,7 @@ def Home():
         JobSeeker_account = cursor.fetchone() 
         if JobSeeker_account:
             session['loggedin'] = True
+            session['id'] = JobSeeker_account[0]
             return redirect('StudentHomePage.html')
         else: 
             msg = 'Incorrect Username/Password'  
@@ -63,6 +67,7 @@ def StudentRegistration():
         Resume = request.form['Resume']
         Password = request.form['Password']
         cursor.execute("INSERT INTO JobSeeker (JS_Username, First_Name, Last_Name, Email, Password, Resume) Values (%s, %s, %s, %s, %s, %s)", (JS_Username, First_Name, Last_Name, Email, Password, Resume))
+        cursor.execute("INSERT IGNORE INTO JobSeeker (JS_Username, First_Name, Last_Name, Email, Password, Resume) Values (%s, %s, %s, %s, %s, %s)", (JS_Username, First_Name, Last_Name, Email, Password, Resume))
         conn.commit()
     return render_template("StudentRegistration.html")
   
@@ -79,32 +84,61 @@ def PostJob():
         User_Id = session['id']
         Job_Field = request.form['Job_Field']
         cursor.execute("INSERT INTO JobPost (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, FK_Companyid, Job_Field) Values (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, User_Id, Job_Field))
+        cursor.execute("INSERT IGNORE INTO JobPost (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, FK_Companyid, Job_Field) Values (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, User_Id, Job_Field))
         conn.commit()
     return render_template("PostJob.html")
 
 @app.route('/StudentHomePage.html', methods=['GET', 'POST'])
 def SearchJob():
     if request.method == "POST":
-        Job_Field = request.form['Job_Field']
-        Search_Value = request.form['Search']
-        if Search_Value == 'all': 
-            cursor.execute("SELECT * FROM JobPost")
-            conn.commit()
-            data = cursor.fetchall()
-
-        else: 
-            cursor.execute('SELECT * FROM JobPost WHERE Job_Title LIKE %s AND Job_Field = %s', ('%' + Search_Value + '%', Job_Field,))
-            conn.commit()
-            data = cursor.fetchall()
-        # all in the search box will return all the tuples
-        return render_template('StudentHomePage.html', data=data)
+        if request.form['submit'] == "submit_search":
+            Job_Field = request.form['Job_Field']
+            Search_Value = request.form['Search']
+            if Search_Value == '': 
+                cursor.execute("SELECT * FROM JobPost")
+                conn.commit()
+                data = cursor.fetchall()
+            else: 
+                cursor.execute('SELECT * FROM JobPost WHERE Job_Title LIKE %s AND Job_Field = %s', ('%' + Search_Value + '%', Job_Field,))
+                conn.commit()
+                data = cursor.fetchall()
+            # all in the search box will return all the tuples
+            return render_template('StudentHomePage.html', data = data)
+        if request.form['submit'] == "submit_apply":
+                buttonID = request.form['buttonID']
+                cursor.execute('INSERT IGNORE INTO applied (FK_Postid, FK_JobSeekerid) Values (%s, %s)', (int(buttonID), int(session['id'])))
+                conn.commit()
+            
     return render_template("StudentHomePage.html")
 
 @app.route('/CompanyHomePage.html' , methods=['GET', 'POST'])
 def CompanyHome():
     cursor.execute('SELECT * FROM JobPost WHERE FK_Companyid = %s', (session['id']))
+    if request.method == "POST":
+        buttonID = request.form['buttonID']
+        session['JobPostid'] = buttonID
+        return redirect(url_for("ShowApplicants"))
+    else:
+        cursor.execute('SELECT * FROM JobPost WHERE FK_Companyid = %s', (session['id']))
+        data = cursor.fetchall()
+        return render_template("CompanyHomePage.html", data = data)
+
+@app.route('/ShowApplicants.html', methods=['GET', 'POST'])
+def ShowApplicants():
+    if request.method == "POST":
+        buttonID = request.form['buttonID']
+        session['JobSeekerid'] = buttonID
+        return redirect(url_for("ShowResume"))
+
+    cursor.execute('SELECT * FROM JobSeeker, Applied WHERE Fk_JobSeekerid = idjobseeker AND FK_Postid = %s', session['JobPostid'])
     data = cursor.fetchall()
-    return render_template("CompanyHomePage.html", data = data)
+    return render_template("ShowApplicants.html", data = data)
+
+@app.route('/ShowResume.html', methods=['GET', 'POST'])
+def ShowResume():
+    cursor.execute('SELECT Resume FROM JobSeeker WHERE idJobSeeker = %s', (session['JobSeekerid']))
+    data = cursor.fetchall()
+    return render_template("ShowResume.html", data = data)
 
 @app.route('/logout')
 def logout():
