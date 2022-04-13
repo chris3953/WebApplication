@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 app.secret_key = "SFSU"
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'root66730'
+app.config['MYSQL_DATABASE_PASSWORD'] = '2112'
 app.config['MYSQL_DATABASE_DB'] = 'LinkedSF'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'                                                    
 
@@ -16,6 +16,19 @@ mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
 
+def company_required(func):
+    def secure_function():
+        if 'employer' not in session['type']:
+            return redirect('/CompanyRegistration.html')
+        return func()
+    return secure_function
+
+# def student_required(func):
+#     def secure_function():
+#         if 'student' not in session['type']:
+#             return redirect('/StudentRegistration.html')
+#         return func()
+#     return secure_function
 
 
 @app.route('/', methods = ['GET', 'POST'] )
@@ -29,6 +42,7 @@ def Home():
         if Company_account:
             session['loggedin'] = True 
             session['id'] = Company_account[0]
+            session['type'] = 'employer'
             return redirect('CompanyHomePage.html')
         else: 
             msg = 'Incorrect Username/Password'  
@@ -40,6 +54,7 @@ def Home():
         if JobSeeker_account:
             session['loggedin'] = True
             session['id'] = JobSeeker_account[0]
+            session['type'] = 'student'
             return redirect('StudentHomePage.html')
         else: 
             msg = 'Incorrect Username/Password'  
@@ -55,6 +70,10 @@ def CompanyRegister():
         Password = request.form['Password']
         cursor.execute("INSERT INTO Company (Company_Name, Company_Email, Company_Username, Password) Values (%s, %s, %s, %s)", (Company_Name, Company_Email, Company_Username, Password))
         conn.commit()
+
+        ### To do: validate input
+
+        return redirect("/")
     return render_template("CompanyRegistration.html")
 
 @app.route('/StudentRegistration.html', methods = ['GET', 'POST'])
@@ -66,6 +85,9 @@ def StudentRegistration():
         JS_Username = request.form['JS_Username']
         Resume = request.form['Resume']
         Password = request.form['Password']
+
+        ### To do: validate input
+
         cursor.execute("INSERT INTO JobSeeker (JS_Username, First_Name, Last_Name, Email, Password, Resume) Values (%s, %s, %s, %s, %s, %s)", (JS_Username, First_Name, Last_Name, Email, Password, Resume))
         cursor.execute("INSERT IGNORE INTO JobSeeker (JS_Username, First_Name, Last_Name, Email, Password, Resume) Values (%s, %s, %s, %s, %s, %s)", (JS_Username, First_Name, Last_Name, Email, Password, Resume))
         conn.commit()
@@ -112,6 +134,7 @@ def SearchJob():
     return render_template("StudentHomePage.html")
 
 @app.route('/CompanyHomePage.html' , methods=['GET', 'POST'])
+@company_required
 def CompanyHome():
     cursor.execute('SELECT * FROM JobPost WHERE FK_Companyid = %s', (session['id']))
     if request.method == "POST":
@@ -144,7 +167,10 @@ def ShowResume():
 def logout():
     session.pop('loggedin', None)
     session.pop('id', None)
+    session.pop('type', None)
     return redirect('/')
+
+
 
 if __name__ == '__main__':
     app.debug = True

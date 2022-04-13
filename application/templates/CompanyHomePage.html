@@ -35,25 +35,52 @@
         </div> 
       </a>
 
-      <div class="card-div">
-        <h3>Posted Jobs:</h3>
-        {% for n in data %}
-            <div class="card-body shadow">
-               <h5>{{n[1]}}</h5>
-               <p>Field Of Work: {{n[9]}}
-                 <br>Location: {{n[5]}} {{n[6]}}, {{n[7]}}
-                 <br>Description: {{n[2]}}
-                 <br>Job Skills: {{n[3]}}
-                 <br>Wages: {{n[4]}}
-               </p>
-               <!-- <p>{{n[5]}}</p> -->
-               <!-- <p>{{n[5]}}
-                 {{n[6]}}, {{n[7]}}</p>
-               <p>{{n[9]}}</p> -->
-             
-               
+      <div class="container shadow">
+        <!-- <h4>Posted Jobs</h4> -->
 
-               <form method="POST">
+        <div class="row">
+          <div class="col-4">
+            <h6>Title</h6>
+          </div>
+          <div class="col">
+            <h6>Field</h6>
+          </div>
+          <div class="col text-center">
+            <h6>Views</h6>
+          </div>
+          <div class="col text-center">
+            <h6>Applicants</h6>
+          </div>
+          <div class="col text-center">
+            <h6>Date Posted</h6>
+          </div>
+          <div class="col text-center">
+            <h6>Update</h6>
+          </div>
+        </div>
+
+        {% for n in data %}
+          <div class="row">
+            <div class="col-4">
+              <h5>{{n[1]}}</h5>
+            </div>
+            <div class="col">
+              {{n[9]}}
+            </div>
+            <div class="col text-center">
+              <h6>Views</h6>
+            </div>
+            <div class="col text-center">
+              <h6>Applicants</h6>
+            </div>
+            <div class="col text-center">
+              30
+            </div>
+            <div class="col text-center">
+              <button type="button" class="btn btn-outline-danger mb-3">Delete</button>
+            </div>
+          </div>
+          <!-- <form method="POST">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                   <button type="button" class="btn btn-outline-danger" >Delete Job Post</button>
                 </div>
@@ -65,9 +92,9 @@
                 <input type="hidden" name="buttonID" value="{{n[0]}}"> 
                 <button type="submit" class="btn btn-outline-danger" >Show Applicants</button>
                  </div>
-               </form> 
-            </div>
+               </form>  -->
         {% endfor %}
-        </div>
+      </div>
+
 </body>
 </html>
