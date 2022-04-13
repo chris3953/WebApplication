@@ -1,13 +1,13 @@
 #from crypt import methods
 import base64
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for, flash
 from flaskext.mysql import MySQL
 
 app = Flask(__name__)
 
 app.secret_key = "SFSU"
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = '2112'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'Orange3953!'
 app.config['MYSQL_DATABASE_DB'] = 'LinkedSF'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'                                                    
 
@@ -33,7 +33,7 @@ def company_required(func):
 
 @app.route('/', methods = ['GET', 'POST'] )
 def Home():
-    msg = ''
+    
     if request.method == "POST":
         Company_Username = request.form['Company_Username']
         Password = request.form['Password']
@@ -44,8 +44,7 @@ def Home():
             session['id'] = Company_account[0]
             session['type'] = 'employer'
             return redirect('CompanyHomePage.html')
-        else: 
-            msg = 'Incorrect Username/Password'  
+        
     if request.method == 'POST':
         JS_Username = request.form['Company_Username']
         Password = request.form['Password']
@@ -57,9 +56,9 @@ def Home():
             session['type'] = 'student'
             return redirect('StudentHomePage.html')
         else: 
-            msg = 'Incorrect Username/Password'  
+            flash("Incorrect Username/Password")
 
-    return render_template("Homepage.html", msg=msg)
+    return render_template("Homepage.html")
 
 @app.route('/CompanyRegistration.html', methods = ['GET', 'POST'])
 def CompanyRegister():
@@ -70,7 +69,7 @@ def CompanyRegister():
         Password = request.form['Password']
         cursor.execute("INSERT INTO Company (Company_Name, Company_Email, Company_Username, Password) Values (%s, %s, %s, %s)", (Company_Name, Company_Email, Company_Username, Password))
         conn.commit()
-
+        flash("Account Created")
         ### To do: validate input
 
         return redirect("/")
@@ -83,7 +82,7 @@ def StudentRegistration():
         Last_Name = request.form['Last_Name'] 
         Email = request.form['Email']
         JS_Username = request.form['JS_Username']
-        Resume = request.form['Resume']
+        Resume = request.files['Resume']
         Password = request.form['Password']
 
         ### To do: validate input
@@ -91,6 +90,8 @@ def StudentRegistration():
         cursor.execute("INSERT INTO JobSeeker (JS_Username, First_Name, Last_Name, Email, Password, Resume) Values (%s, %s, %s, %s, %s, %s)", (JS_Username, First_Name, Last_Name, Email, Password, Resume))
         cursor.execute("INSERT IGNORE INTO JobSeeker (JS_Username, First_Name, Last_Name, Email, Password, Resume) Values (%s, %s, %s, %s, %s, %s)", (JS_Username, First_Name, Last_Name, Email, Password, Resume))
         conn.commit()
+        flash("Account Created")
+        return redirect("/")
     return render_template("StudentRegistration.html")
   
 @app.route('/PostJob.html', methods = ['GET', 'POST'])
@@ -108,6 +109,7 @@ def PostJob():
         cursor.execute("INSERT INTO JobPost (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, FK_Companyid, Job_Field) Values (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, User_Id, Job_Field))
         cursor.execute("INSERT IGNORE INTO JobPost (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, FK_Companyid, Job_Field) Values (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, User_Id, Job_Field))
         conn.commit()
+        flash("Created Successfully")
     return render_template("PostJob.html")
 
 @app.route('/StudentHomePage.html', methods=['GET', 'POST'])
@@ -130,7 +132,7 @@ def SearchJob():
                 buttonID = request.form['buttonID']
                 cursor.execute('INSERT IGNORE INTO applied (FK_Postid, FK_JobSeekerid) Values (%s, %s)', (int(buttonID), int(session['id'])))
                 conn.commit()
-            
+                flash("You Have Successfully Applied")
     return render_template("StudentHomePage.html")
 
 @app.route('/CompanyHomePage.html' , methods=['GET', 'POST'])
@@ -168,6 +170,7 @@ def logout():
     session.pop('loggedin', None)
     session.pop('id', None)
     session.pop('type', None)
+    flash("You Have Successfully Logged Out")
     return redirect('/')
 
 

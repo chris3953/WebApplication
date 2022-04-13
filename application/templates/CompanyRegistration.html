@@ -13,13 +13,13 @@
             <h3 class="page-header"><center>Company Registration</center></h3>
 
             <label class="form-label fw-lighter lh-sm">Company Name</label>
-            <input type="text" class="form-control mb-1" name="Company_Name" required>
+            <input type="text" class="form-control mb-1" name="Company_Name" minlength= "2" required>
             <label class="form-label fw-lighter lh-sm">Company Email</label>
-            <input type="email" class="form-control mb-1" name="Company_Email" required>
+            <input type="email" class="form-control mb-1" name="Company_Email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
             <label class="form-label fw-lighter lh-sm">Company Username</label>
-            <input type="text" class="form-control mb-1" name="Company_Username" required>
+            <input type="text" class="form-control mb-1" name="Company_Username"  minlength = "8" maxlength = "15" required>
             <label class="form-label fw-lighter lh-sm">Company Password</label>
-            <input type="password" class="form-control mb-1" name="Password" required>
+            <input type="password" class="form-control mb-1" name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
 
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-outline-light mt-4" <i>Create Account</i></button>

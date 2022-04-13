@@ -30,6 +30,17 @@
 
     <h1>Student Page</h1>
     <form method="POST">
+      
+
+      {% for message in get_flashed_messages() %}
+       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{message}}
+      
+      </div>
+      {% endfor %}
+
+
+
         <input class="form-control me-2" name="Search" id="Search" type="search" placeholder="Search" aria-label="Search">
         <select class="form-select" name="Job_Field" id="Job_Field">
             <option value="Iot">Iot</option>
@@ -46,6 +57,7 @@
           <button type="submit"  name="submit" value= "submit_search" class="btn btn-outline-danger" >Search</button>
            </div>
         
+           
     </form>  
 
       <br>
