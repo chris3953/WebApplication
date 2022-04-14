@@ -16,19 +16,34 @@
                 <div class="col">
                     <label class="form-label fw-lighter lh-sm">First Name</label>
                     <input type="text" class="form-control mb-1"  minlength = "2"name="First_Name" required>
+                    <div class="invalid-feedback">
+                        First name must be more than 2 characters
+                      </div>
                 </div>
                 <div class="col">
                     <label class="form-label fw-lighter lh-sm">Last Name</label>
                     <input type="text" class="form-control mb-1"  minlength= "2" name="Last_Name" required>
+                    <div class="invalid-feedback">
+                        Last name must be more than 2 characters
+                      </div>
                 </div>
             </div>
 
             <label class="form-label fw-lighter lh-sm">Email</label>
             <input type="email" class="form-control mb-1" name="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+            <div class="invalid-feedback">
+                Email signature must be greater than 2 characters and contain a valid address
+              </div>
             <label class="form-label fw-lighter lh-sm">Username</label>
             <input type="text" class="form-control mb-1" name="JS_Username" minlength = "8" maxlength = "15" required>
+            <div class="invalid-feedback">
+                Username must be 8 to 15 characters long
+              </div>
             <label class="form-label fw-lighter lh-sm">Password</label>
             <input type="password" class="form-control mb-1" name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+            <div class="invalid-feedback">
+                Password must be greater than 8 characters long requiring at least 1 a-z, A-Z, and 0-9 character
+              </div>
             <label class="form-label fw-lighter lh-sm">Resume</label>
             <input type="file" class="form-control mb-1"name="Resume" required>
 

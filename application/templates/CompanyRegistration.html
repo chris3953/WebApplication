@@ -14,13 +14,24 @@
 
             <label class="form-label fw-lighter lh-sm">Company Name</label>
             <input type="text" class="form-control mb-1" name="Company_Name" minlength= "2" required>
+            <div class="invalid-feedback">
+                Company name must be more than 2 characters
+              </div>
             <label class="form-label fw-lighter lh-sm">Company Email</label>
             <input type="email" class="form-control mb-1" name="Company_Email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+            <div class="invalid-feedback">
+                Email signature must be greater than 2 characters and contain a valid address
+              </div>
             <label class="form-label fw-lighter lh-sm">Company Username</label>
             <input type="text" class="form-control mb-1" name="Company_Username"  minlength = "8" maxlength = "15" required>
+            <div class="invalid-feedback">
+                Username must be 8 to 15 characters long
+              </div>
             <label class="form-label fw-lighter lh-sm">Company Password</label>
             <input type="password" class="form-control mb-1" name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
-
+            <div class="invalid-feedback">
+                Password must be greater than 8 characters long requiring at least 1 a-z, A-Z, and 0-9 character
+              </div>
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-outline-light mt-4" <i>Create Account</i></button>
               </div>
