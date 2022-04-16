@@ -1,13 +1,14 @@
-#from crypt import methods
+#from crypt import method
+import os
 import base64
-from flask import Flask, render_template, request, redirect, session, url_for, flash
+from flask import Flask, render_template, request, redirect, session, url_for, flash, send_from_directory
 from flaskext.mysql import MySQL
 
 app = Flask(__name__)
 
 app.secret_key = "SFSU"
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = '2112'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'root66730'
 app.config['MYSQL_DATABASE_DB'] = 'LinkedSF'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'                                                    
 
@@ -83,12 +84,13 @@ def StudentRegistration():
         Email = request.form['Email']
         JS_Username = request.form['JS_Username']
         Resume = request.files['Resume']
+        Resume_data = Resume.read()
         Password = request.form['Password']
 
         ### To do: validate input
 
-        cursor.execute("INSERT INTO JobSeeker (JS_Username, First_Name, Last_Name, Email, Password, Resume) Values (%s, %s, %s, %s, %s, %s)", (JS_Username, First_Name, Last_Name, Email, Password, Resume))
-        cursor.execute("INSERT IGNORE INTO JobSeeker (JS_Username, First_Name, Last_Name, Email, Password, Resume) Values (%s, %s, %s, %s, %s, %s)", (JS_Username, First_Name, Last_Name, Email, Password, Resume))
+        cursor.execute("INSERT INTO JobSeeker (JS_Username, First_Name, Last_Name, Email, Password, Resume) Values (%s, %s, %s, %s, %s, %s)", (JS_Username, First_Name, Last_Name, Email, Password, Resume_data))
+        cursor.execute("INSERT IGNORE INTO JobSeeker (JS_Username, First_Name, Last_Name, Email, Password, Resume) Values (%s, %s, %s, %s, %s, %s)", (JS_Username, First_Name, Last_Name, Email, Password, Resume_data))
         conn.commit()
         flash("Account Created")
         return redirect("/")
@@ -163,7 +165,9 @@ def ShowApplicants():
 def ShowResume():
     cursor.execute('SELECT Resume FROM JobSeeker WHERE idJobSeeker = %s', (session['JobSeekerid']))
     data = cursor.fetchall()
-    return render_template("ShowResume.html", data = data)
+    with open('Temp.pdf', 'wb') as fp:
+        fp.write(data[0][0])
+    return send_from_directory(os.path.abspath(os.getcwd()), 'Temp.pdf')
 
 @app.route('/logout')
 def logout():
