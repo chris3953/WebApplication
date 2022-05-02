@@ -1,6 +1,7 @@
 body {
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
 form {
     padding: 3rem 3rem 3rem 3rem;
     margin: 3rem auto 3rem auto;
@@ -12,7 +13,7 @@ form {
 .form-control, .form-select {
     border-radius: 15px !important;
     background-color: rgb(244, 247, 249) !important;
-    border: 1px solid #daa520 !important;
+    border: 1px solid gray !important;
 }
 
 .page-header {
@@ -50,34 +51,4 @@ form {
     color: black !important;
     font-weight: 700 !important;
 
-}
-
-.text-default {
-    color: #800080 !important;
-}
-.bg-primary {
-    background: #800080 !important;
-}
-.txt-secondary {
-    color: #daa520 !important;
-}
-.bg-secondary {
-    background: #daa520 !important;
-}
-.text-black {
-    color: #111111 !important;
-}
-.text-white {
-    color: #ffffff !important;
-}
-.component-default {
-    background: #daa520 !important;
-    color: #800080 !important;
-}
-.component-secondary {
-    background: #800080 !important;
-    color: #ffffff !important;
-}
-.form-label {
-    color: #800080 !important;
 }
