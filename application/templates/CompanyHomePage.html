@@ -6,95 +6,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CompanyHomePage</title>
     <link rel="stylesheet" href="static/style.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
 
 </head>
 <body>
-
-  <nav class="navbar navbar-light">
-    <div class="container-fluid">
-      <span class="navbar-brand">LinkedSF</span>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a href="/logout">
-          <div class="d-grid">
-            <button type="button" class="btn btn-link">
-                Logout
-            </button> 
-          </div> 
-        </a>
-      </div>
+  <section class="layout" id="comp-home">
+    <div class="header">
+      <nav class="navbar navbar-light" id="main-nav">
+        <div class="container-fluid">
+          <span class="navbar-brand"><img src="static/logo3.png" id="linked-logo"></span>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="/logout">
+              <div class="/logout">
+                <button type="button" class="btn" id="royal-btn">
+                    Logout
+                </button> 
+              </div> 
+            </a>
+          </div>
+        </div>
+      </nav>
+      <nav class="navbar" id="dash-nav">
+        <div class="container-fluid" id="dash-nav-item">
+          <h5 class="m-0 px-2">Dashboard</h5>
+          <h5 class="m-0 px-2">Post Jobs</h5>
+          <h5 class="m-0 px-2">Profile</h5>
+        </div>
+      </nav>
     </div>
-  </nav>
 
-
-    <a href="PostJob.html">
-        <div class="d-grid">
-          <button type="submit" class="btn btn-primary mb-2">
-              Create Job Post
-          </button> 
-        </div> 
-      </a>
-
-      <div class="container shadow">
-        <!-- <h4>Posted Jobs</h4> -->
-
-        <div class="row">
-          <div class="col-4">
+    <div class="body">
+      <div class="container" id="comp-title">
+        <h4>Posted Jobs</h4>
+        <h6>Sort by:</h6>
+      </div>
+      <div class="container shadow" id="comp-posts">
+        <div class="row" id="job-post-cont">
+          <div class="col-4" id="post-item">
             <h6>Title</h6>
           </div>
-          <div class="col">
+          <div class="col" id="post-item">
             <h6>Field</h6>
           </div>
-          <div class="col text-center">
+          <div class="col text-center" id="post-item">
             <h6>Views</h6>
           </div>
-          <div class="col text-center">
+          <div class="col text-center" id="post-item">
             <h6>Applicants</h6>
           </div>
-          <div class="col text-center">
-            <h6>Date Posted</h6>
+          <div class="col text-center" id="post-item">
+            <h6>Posted</h6>
           </div>
-          <div class="col text-center">
+          <div class="col text-center" id="post-item">
             <h6>Update</h6>
           </div>
         </div>
-
+    
         {% for n in data %}
-          <div class="row">
-            <div class="col-4">
-              <h5>{{n[1]}}</h5>
-            </div>
-            <div class="col">
-              {{n[9]}}
-            </div>
-            <div class="col text-center">
-              <h6>Views</h6>
-            </div>
-            <div class="col text-center">
-              <h6>Applicants</h6>
-            </div>
-            <div class="col text-center">
-              30
-            </div>
-            <div class="col text-center">
-              <button type="button" class="btn btn-outline-danger mb-3">Delete</button>
-            </div>
+        <div class="row" id="job-post-cont">
+          <div class="col-4" id="post-item">
+            <h5>{{n[1]}}</h5>
           </div>
-          <!-- <form method="POST">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <button type="button" class="btn btn-outline-danger" >Delete Job Post</button>
-                </div>
-                 
-                 <br>
-                 <br> 
-
-                 <div class = "d-grid gap-2 d-md-flex justify-content-md-end"> 
-                <input type="hidden" name="buttonID" value="{{n[0]}}"> 
-                <button type="submit" class="btn btn-outline-danger" >Show Applicants</button>
-                 </div>
-               </form> -->
+          <div class="col" id="post-item">
+            {{n[9]}}
+          </div>
+          <div class="col text-center" id="post-item">
+            <h6>Views</h6>
+          </div>
+          <div class="col text-center" id="post-item">
+            <form method="POST">
+             <input type="hidden" name="buttonID" value="{{n[0]}}"> 
+             <button type="submit" class="btn btn-link-dark fw-bold shadow-none p-0">Show </button>
+            </form>
+          </div>
+          <div class="col text-center" id="post-item">
+            30
+          </div>
+          <div class="col text-center" id="post-item">
+            <form method="POST">
+              <button type="button" class="btn btn-outline-danger mb-3 shadow-none">Delete</button>
+            </form>
+          </div>
+                <!-- <form method="POST">
+                  <div class="d-inline">
+                    <input type="hidden" name="buttonID" value="{{n[0]}}"> 
+                    <button type="submit" class="btn btn-link-dark fw-bold shadow-none">Show Applicants</button>
+    
+                    <button type="button" class="btn btn-outline-danger" >Delete</button>
+                  </div>
+                 </form>  -->
+        </div>
         {% endfor %}
       </div>
+    </div>
 
+    
+
+      <!-- <a href="PostJob.html">
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary mb-2">
+                Create Job Post
+            </button> 
+          </div> 
+        </a> -->
+  
+    
+  </section>
 </body>
+
+<script >
+  const sidebar = document.querySelectorAll('a')
+
+  sidebar.forEach(tab => {
+      tab.addEventListener('click', () => {
+          const target = document.querySelector(tab.dataset.tabTarget)
+          sidebar.forEach(tab => {
+              tab.classList.remove('active')
+          })
+          tab.classList.add('active')
+      })
+  })
+
+</script>
 </html>

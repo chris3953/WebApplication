@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 app.secret_key = "SFSU"
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'root66730'
+app.config['MYSQL_DATABASE_PASSWORD'] = '2112'
 app.config['MYSQL_DATABASE_DB'] = 'LinkedSF'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'                                                    
 
