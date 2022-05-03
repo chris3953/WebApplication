@@ -117,10 +117,11 @@ img {
 }
 
 #dash-nav {
-    background-color: #361b98;
+    background-color: #3e1fad;
     color: white;
     position: sticky;
     justify-content: center !important;
+    padding: 0;
 }
 
 /* .btn-link, a {
@@ -231,5 +232,18 @@ img {
     margin: 2rem auto 0rem auto;
     padding: 1.5rem 0rem 0rem 0rem;
     width: 70%; 
+}
+
+#dash-header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-decoration: none !important;
+    color: white;
+    font-size: large;
+}
+
+#dash-header:is(:link, :active, :visited).active {
+    background-color: #361b98;
+    /* background-color: #ffdf80; */
 }
   
