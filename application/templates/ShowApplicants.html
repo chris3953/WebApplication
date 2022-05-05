@@ -13,14 +13,16 @@
 <h1>Applicants</h1>
 
 <div class="card-div">
+<!-- show data of every applicant that applied to this job -->
     {% for n in data %}
         <div class="card-body shadow">
-            <p>{{n[2]}} {{n[3]}}</p>
+           <p>{{n[2]}} {{n[3]}}</p>
            <form method="POST">
-             <div class = "d-grid gap-2 d-md-flex justify-content-md-end"> 
-            <input type="hidden" name="buttonID" value="{{n[0]}}"> 
-            <button type="submit" name = "submit" value="see_resume" class="btn btn-outline-danger" >Applicant's Resume</button>
-             </div>
+           <div class = "d-grid gap-2 d-md-flex justify-content-md-end">
+<!-- if button is clicked, record the corresponding applicant ID --> 
+              <input type="hidden" name="buttonID" value="{{n[0]}}"> 
+              <button type="submit" name = "submit" value="see_resume" class="btn btn-outline-danger" >Applicant's Resume</button>
+           </div>
            </form> 
         </div>
     {% endfor %}
