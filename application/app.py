@@ -6,12 +6,17 @@ from flaskext.mysql import MySQL
 
 app = Flask(__name__)
 
+
+#the code below establishes 
+#the login credentials to connect to database
 app.secret_key = "SFSU"
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = '2112'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'Orange3953!'
 app.config['MYSQL_DATABASE_DB'] = 'LinkedSF'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'                                                    
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'    
 
+
+#Connects flaskapp to Mysql database 
 mysql = MySQL()
 mysql.init_app(app)
 conn = mysql.connect()
@@ -32,44 +37,63 @@ def company_required(func):
 #     return secure_function
 
 
+# This app route is for the home page 
 @app.route('/', methods = ['GET', 'POST'] )
 def Home():
-    
+# uses the POST method to request information entered into fields
+# this info is then stored into variables  
     if request.method == "POST":
         Company_Username = request.form['Company_Username']
         Password = request.form['Password']
+
+# uses execute statement and sql statement 
+# to retrieve an account based on matching login info
         cursor.execute('SELECT * FROM Company WHERE Company_Username = %s AND Password = %s', (Company_Username, Password,))
         Company_account = cursor.fetchone()
+
+#checks to see if the selected account is a company account
+# if it is a company, then we direct the user to a company home page
         if Company_account:
             session['loggedin'] = True 
             session['id'] = Company_account[0]
             session['type'] = 'employer'
             return redirect('CompanyHomePage.html')
-        
+ # uses execute statement and sql statement 
+# to retrieve an account based on matching login info          
     if request.method == 'POST':
         JS_Username = request.form['Company_Username']
         Password = request.form['Password']
         cursor.execute('SELECT * FROM JobSeeker WHERE JS_Username = %s AND Password = %s', (JS_Username, Password,))
         JobSeeker_account = cursor.fetchone() 
+
+#checks to see if the selected account is a student account
+# if it is a company, then we direct the user to a student home page
         if JobSeeker_account:
             session['loggedin'] = True
             session['id'] = JobSeeker_account[0]
             session['type'] = 'student'
             return redirect('StudentHomePage.html')
+#if the user has entered incorrect login info then 
+# we will display an error message
         else: 
             flash("Incorrect Username/Password")
 
     return render_template("Homepage.html")
 
+#route to the company registration 
 @app.route('/CompanyRegistration.html', methods = ['GET', 'POST'])
 def CompanyRegister():
+#uses POST method to request information entered by user
+#then stores the info into variables 
     if request.method == "POST":
         Company_Name = request.form['Company_Name']  
         Company_Email = request.form['Company_Email']
         Company_Username = request.form['Company_Username']
         Password = request.form['Password']
+#execute statement inserts the stored vairable into the DB
         cursor.execute("INSERT INTO Company (Company_Name, Company_Email, Company_Username, Password) Values (%s, %s, %s, %s)", (Company_Name, Company_Email, Company_Username, Password))
         conn.commit()
+#sends message when account is successfully created
         flash("Account Created")
         ### To do: validate input
 
@@ -95,9 +119,13 @@ def StudentRegistration():
         flash("Account Created")
         return redirect("/")
     return render_template("StudentRegistration.html")
-  
+
+#route for creating a job post
 @app.route('/PostJob.html', methods = ['GET', 'POST'])
 def PostJob():
+
+#uses POST method to request information entered by the user
+#info is then stored into variables
     if request.method == "POST":
         Job_Title = request.form['Job_Title']  
         Job_Description= request.form['Job_Description']
@@ -108,10 +136,14 @@ def PostJob():
         Job_State = request.form['Job_State']
         User_Id = session['id']
         Job_Field = request.form['Job_Field']
+    
+#uses execute statement to insert variables into the DB
         cursor.execute("INSERT INTO JobPost (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, FK_Companyid, Job_Field) Values (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, User_Id, Job_Field))
         conn.commit()
+#sends success message when a post is created
         flash("Created Successfully")
     return render_template("PostJob.html")
+
 
 @app.route('/StudentHomePage.html', methods=['GET', 'POST'])
 def SearchJob():
@@ -168,11 +200,15 @@ def ShowResume():
         fp.write(data[0][0])
     return send_from_directory(os.path.abspath(os.getcwd()), 'Temp.pdf')
 
+#logout route
 @app.route('/logout')
 def logout():
+#ends the users session 
     session.pop('loggedin', None)
     session.pop('id', None)
     session.pop('type', None)
+#sends the a message when user is logged out 
+# and returns them to home page
     flash("You Have Successfully Logged Out")
     return redirect('/')
 
