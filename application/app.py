@@ -6,7 +6,6 @@ from flaskext.mysql import MySQL
 
 app = Flask(__name__)
 
-
 #the code below establishes 
 #the login credentials to connect to database
 app.secret_key = "SFSU"
@@ -14,7 +13,6 @@ app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'Orange3953!'
 app.config['MYSQL_DATABASE_DB'] = 'LinkedSF'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'    
-
 
 #Connects flaskapp to Mysql database 
 mysql = MySQL()
@@ -28,14 +26,6 @@ def company_required(func):
             return redirect('/CompanyRegistration.html')
         return func()
     return secure_function
-
-# def student_required(func):
-#     def secure_function():
-#         if 'student' not in session['type']:
-#             return redirect('/StudentRegistration.html')
-#         return func()
-#     return secure_function
-
 
 # This app route is for the home page 
 @app.route('/', methods = ['GET', 'POST'] )
@@ -58,7 +48,7 @@ def Home():
             session['id'] = Company_account[0]
             session['type'] = 'employer'
             return redirect('CompanyHomePage.html')
- # uses execute statement and sql statement 
+# uses execute statement and sql statement 
 # to retrieve an account based on matching login info          
     if request.method == 'POST':
         JS_Username = request.form['Company_Username']
@@ -159,7 +149,7 @@ def SearchJob():
                 cursor.execute('SELECT * FROM JobPost WHERE Job_Title LIKE %s AND Job_Field = %s', ('%' + Search_Value + '%', Job_Field,))
                 conn.commit()
                 data = cursor.fetchall()
-            # all in the search box will return all the tuples
+#all in the search box will return all the tuples
             return render_template('StudentHomePage.html', data = data)
         if request.form['submit'] == "submit_apply":
                 buttonID = request.form['buttonID']
@@ -173,10 +163,12 @@ def SearchJob():
 def CompanyHome():
     cursor.execute('SELECT * FROM JobPost WHERE FK_Companyid = %s', (session['id']))
     if request.method == "POST":
+#if a job's botton is clicked, show the applicant list with corresponding job ID
         buttonID = request.form['buttonID']
         session['JobPostid'] = buttonID
         return redirect(url_for("ShowApplicants"))
     else:
+#normal case, show the jobs the company had posted 
         cursor.execute('SELECT * FROM JobPost WHERE FK_Companyid = %s', (session['id']))
         data = cursor.fetchall()
         return render_template("CompanyHomePage.html", data = data)
@@ -184,16 +176,19 @@ def CompanyHome():
 @app.route('/ShowApplicants.html', methods=['GET', 'POST'])
 def ShowApplicants():
     if request.method == "POST":
+#if a applicant's botton is clicked, show the resume with corresponding applicant ID
         buttonID = request.form['buttonID']
         session['JobSeekerid'] = buttonID
         return redirect(url_for("ShowResume"))
 
+#normal case, show the applicants
     cursor.execute('SELECT * FROM JobSeeker, Applied WHERE Fk_JobSeekerid = idjobseeker AND FK_Postid = %s', session['JobPostid'])
     data = cursor.fetchall()
     return render_template("ShowApplicants.html", data = data)
 
 @app.route('/ShowResume.html', methods=['GET', 'POST'])
 def ShowResume():
+#Download the resume from database to server temperally and show it.
     cursor.execute('SELECT Resume FROM JobSeeker WHERE idJobSeeker = %s', (session['JobSeekerid']))
     data = cursor.fetchall()
     with open('Temp.pdf', 'wb') as fp:
