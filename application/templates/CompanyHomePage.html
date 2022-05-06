@@ -20,6 +20,8 @@
         <div class="container-fluid">
           <span class="navbar-brand"><img src="static/logo3.png" id="linked-logo"></span>
           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <!-- if logout button is clicked then they will be directed to the logout route 
+          in app.py which terminates the users session-->
             <a href="/logout">
               <div class="/logout">
                 <button type="button" class="btn" id="royal-btn">
@@ -32,9 +34,9 @@
       </nav>
       <nav class="navbar" id="dash-nav">
         <div class="container-fluid" id="dash-nav-item">
-          <a href="#h" class="tab active m-0 px-3" id="dash-header">Dashboard</a>
-          <a href="#u" class="tab m-0 px-3" id="dash-header">Post Jobs</a>
-          <a href="#r" class="tab m-0 px-3" id="dash-header">Profile</a>
+          <a href="#r" class="tab active m-0 px-3" id="dash-header">Dashboard</a>
+          <a href="PostJob.html" class="tab m-0 px-3" id="dash-header">Post Jobs</a>
+          <a href="#h" class="tab m-0 px-3" id="dash-header">Profile</a>
         </div>
       </nav>
     </div>
@@ -65,7 +67,7 @@
             <h6>Update</h6>
           </div>
         </div>
-    
+    <!-- Displays the posts a company has created -->
         {% for n in data %}
         <div class="row" id="job-post-cont">
           <div class="col-4" id="post-item">
@@ -89,6 +91,7 @@
           </div>
           <div class="col text-center" id="post-item">
             <form method="POST">
+              
               <button type="button" class="btn btn-outline-danger mb-3 shadow-none">Delete</button>
             </form>
           </div>

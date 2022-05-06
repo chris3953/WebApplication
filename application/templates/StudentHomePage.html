@@ -12,6 +12,8 @@
 
 </head>
 <body>
+  <!-- Contains the search box to allow user input and filters to search for particular jobs
+  along with being able to logout and terminate the session -->
   <section class="layout">
     <div class="header">
       <nav class="navbar navbar-light">
@@ -41,6 +43,7 @@
     </div>
 
     <div class="body" id="stu-home">
+      <!-- Displays the error messages and success messages when a user has applied or logged out -->
       <form method="POST" id="stu-search">
         {% for message in get_flashed_messages() %}
          <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -50,7 +53,7 @@
   
         <div class="input-group shadow-sm" id="search-bar">
           <select class="form-select shadow-none" name="Job_Field" id="Job_Field">
-              <option value="">All</option>
+              <option value="">Select Job Field</option>
               <option value="Iot">Iot</option>
               <option value="AI/Machine Learning">AI/Machine Learning</option>
               <option value="5G">5G</option>
@@ -65,7 +68,7 @@
           <button type="submit"  name="submit" value= "submit_search" class="btn btn-outline-danger shadow-none" id="search-btn" ><i class="bi bi-search"></i></button>
         </div>
       </form>
-
+<!-- Displays the the job post information along with giving the student the option to apply -->
       <div class="card-div">
         <center><h3 class="pt-3">Search Results</h3></center>
         {% for item in data %}

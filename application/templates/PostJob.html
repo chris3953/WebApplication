@@ -11,6 +11,7 @@
 <body>
     
     <form class="needs-validation" id="job-post" method="post" action="" novalidate>
+        <!-- prints the flash message that coressponds with a certain action -->
         {% for message in get_flashed_messages() %}
          <div class="alert alert-warning alert-dismissible fade show" role="alert">
         {{message}}
@@ -24,6 +25,8 @@
                 <label class="form-label fw-lighter lh-sm">Title</label>
                 <input type="text" class="form-control mb-1" name="Job_Title" required>
             </div>
+
+            <!-- Allows company to select the field of work such as IOT or Cyber Security for job post-->
             <div class="col">
                 <label for = "Job_Field" class="form-label fw-lighter lh-sm"> Select Field Of Work</label>
 
@@ -40,7 +43,7 @@
                 </select>
             </div>
         </div>
-
+<!-- Allows the company to enter information about the job post such as Pay, Description, etc -->
         <label class="form-label fw-lighter lh-sm">Job Description</label>
         <textarea type="text" class="form-control mb-1" name="Job_Description" required></textarea>
         <label class="form-label fw-lighter lh-sm">Job Skills</label>
@@ -60,10 +63,11 @@
                 <input type="text" class="form-control mb-1" name="Job_State" required>
             </div>
         </div>
-        
+        <!-- After the company has created a post, they are allowed to create another post 
+        or return to the company home page in which they can view their recently created post -->
         <button type="submit" class="btn btn-outline-light mt-4"<i>Create Job Post</i></button>
         <a href="CompanyHomePage.html">
-           <button class="btn btn-outline-light mt-4">Return Home</button> 
+           <button class="btn btn-outline-light mt-4" >Return Home</button> 
         </a>
         <!-- <input type="button" value="Go back!" onclick="history.back()"> -->
     </form>
