@@ -12,7 +12,7 @@ app = Flask(__name__)
 #the login credentials to connect to database
 app.secret_key = "SFSU"
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'Orange3953!'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'root66730'
 app.config['MYSQL_DATABASE_DB'] = 'LinkedSF'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'    
 
@@ -186,9 +186,17 @@ def SearchJob():
 def CompanyHome():
     cursor.execute('SELECT * FROM JobPost WHERE FK_Companyid = %s', (session['id']))
     if request.method == "POST":
-        buttonID = request.form['buttonID']
-        session['JobPostid'] = buttonID
-        return redirect(url_for("ShowApplicants"))
+        buttonID = request.form['buttonID'].split("_")[-1]
+        if request.form['buttonID'].split("_")[0] == "view":
+            session['JobPostid'] = buttonID
+            return redirect(url_for("ShowApplicants"))
+        else:
+            cursor.execute('DELETE FROM applied WHERE FK_Postid = %s', (buttonID))
+            cursor.execute('DELETE FROM JobPost WHERE idJobPost = %s', (buttonID))
+            conn.commit()
+            cursor.execute('SELECT * FROM JobPost WHERE FK_Companyid = %s', (session['id']))
+            data = cursor.fetchall()
+            return render_template("CompanyHomePage.html", data = data)
     else:
         cursor.execute('SELECT * FROM JobPost WHERE FK_Companyid = %s', (session['id']))
         data = cursor.fetchall()

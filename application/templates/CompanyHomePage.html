@@ -82,7 +82,7 @@
           <div class="col text-center" id="post-item">
             <form method="POST">
 <!-- if button is clicked, record the corresponding job ID -->
-             <input type="hidden" name="buttonID" value="{{n[0]}}"> 
+             <input type="hidden" name="buttonID" value="view_{{n[0]}}"> 
              <button type="submit" class="btn btn-link-dark fw-bold shadow-none p-0">Show Applicants</button>
             </form>
           </div>
@@ -91,8 +91,9 @@
           </div>
           <div class="col text-center" id="post-item">
             <form method="POST">
-              
-              <button type="button" class="btn btn-outline-danger mb-3 shadow-none">Delete</button>
+<!-- if button is clicked, record the corresponding job ID -->
+              <input type="hidden" name="buttonID" value="delete_{{n[0]}}">
+              <button type="submit" class="btn btn-outline-danger mb-3 shadow-none">Delete</button>
             </form>
           </div>
                 <!-- <form method="POST">
