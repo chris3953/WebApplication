@@ -1,5 +1,5 @@
 #from crypt import method
-from crypt import methods
+# from crypt import methods
 import os
 import base64
 from flask import Flask, render_template, request, redirect, session, url_for, flash, send_from_directory
@@ -12,7 +12,7 @@ app = Flask(__name__)
 #the login credentials to connect to database
 app.secret_key = "SFSU"
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'root66730'
+app.config['MYSQL_DATABASE_PASSWORD'] = '2112'
 app.config['MYSQL_DATABASE_DB'] = 'LinkedSF'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'    
 

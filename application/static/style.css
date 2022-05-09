@@ -1,8 +1,6 @@
 body {
     font-family: 'Josefin Sans', sans-serif !important;
     /* background-color: #f9f9f9 !important; */
-    width: 100%;
-    height: 100%;
 }
 
 #linked-logo {
@@ -248,19 +246,4 @@ img {
     background-color: #361b98;
     /* background-color: #ffdf80; */
 }
-
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.content-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-header {
-    background-color: #3e1fad !important;
-    color: white ;
-}
+  
