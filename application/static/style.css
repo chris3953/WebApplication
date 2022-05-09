@@ -3,13 +3,27 @@ body {
     /* background-color: #f9f9f9 !important; */
 }
 
+#home-vector {
+    width: 65%;
+    padding: 1rem 3rem 1rem 0rem;
+}
+
 #linked-logo {
     height: 30px !important;
 }
 
 #home-page {
-    height: 100vh;
-    background-image: linear-gradient( 0deg, #ebdb9e 10%, #3b1f71 100%);
+    display: inline-flex;
+}
+
+#home-header {
+    font-weight: 900;
+    font-size: 55px;
+}
+
+.hh-content {
+    padding: 3rem 0rem 1rem 2.75rem;
+    margin: 1rem 0rem 1rem 1rem;
 }
 
 #home-content {
@@ -55,7 +69,7 @@ img {
     background-color: white;
     border: 1px solid #3e1fad;
     border-bottom: 2px solid #3e1fad;
-    background-color: #fafafa !important;
+    /* background-color: #fafafa !important; */
 }
 
 #royal-btn {
@@ -71,12 +85,12 @@ img {
     background-color: #361b98;
 }
 
-#form-ctrl-gold{
+#form-ctrl-gold, #username, #password{
     border-radius: 15px;
     background-color: white;
     border: 1px solid #ffdf80;
     border-bottom: 2px solid #ffdf80;
-    background-color: #fafafa !important;
+    /* background-color: #fafafa !important; */
 }
 
 #gold-btn {
@@ -113,7 +127,7 @@ img {
 }
 
 #main-nav {
-    padding: 1rem 2rem 1rem 2rem !important;
+    padding: 1rem 3rem 1rem 3rem !important;
 }
 
 #dash-nav {
@@ -158,7 +172,7 @@ img {
     margin-right: 1rem; */
     /* height: 6rem;
     background-color: white; */
-    box-shadow: rgb(0 0 0 / 4%) 0px -1px 2px, rgb(0 0 0 / 4%) 0px 1px 2px, rgb(0 0 0 / 4%) 0px 3px 4px;
+    /* box-shadow: rgb(0 0 0 / 4%) 0px -1px 2px, rgb(0 0 0 / 4%) 0px 1px 2px, rgb(0 0 0 / 4%) 0px 3px 4px; */
     /* border-bottom: 1px solid black; */
     
 }
