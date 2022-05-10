@@ -37,11 +37,21 @@ img {
 }
 
 /* stu-home was here */
-#comp-reg, #stu-reg, #job-post {
+#comp-reg, #stu-reg{
     padding: 3rem 3rem 3rem 3rem;
     margin: 3rem auto 3rem auto;
     width: 30rem; 
     border-radius: 10px;   
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+}
+
+#job-post {
+    column-gap: 2rem;
+    padding: 2rem 3rem 3rem 3rem;
+    margin: 3rem auto 3rem auto;
+    width: 75%; 
+    border-radius: 10px; 
+    display: flex;  
     /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
