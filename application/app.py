@@ -12,7 +12,7 @@ app = Flask(__name__)
 #the login credentials to connect to database
 app.secret_key = "SFSU"
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'Orange3953!'
+app.config['MYSQL_DATABASE_PASSWORD'] = '2112'
 app.config['MYSQL_DATABASE_DB'] = 'LinkedSF'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'    
 
@@ -139,7 +139,7 @@ def PostJob():
         Job_Field = request.form['Job_Field']
     
 #uses execute statement to insert variables into the DB
-        cursor.execute("INSERT INTO JobPost (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, FK_Companyid, Job_Field) Values (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, User_Id, Job_Field))
+        cursor.execute("INSERT INTO JobPost (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Adress, Job_City, Job_State, FK_Companyid, Job_Field) Values (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (Job_Title, Job_Description, Job_Skills, Job_Pay, Job_Street_Address, Job_City, Job_State, User_Id, Job_Field))
         conn.commit()
 #sends success message when a post is created
         flash("Created Successfully")
@@ -149,12 +149,15 @@ def PostJob():
 
 @app.route('/StudentHomePage.html', methods=['GET', 'POST'])
 def SearchJob():
+    cursor.execute("SELECT * FROM linkedsf.jobpost ORDER BY idJobPost DESC LIMIT 3")
+    conn.commit()
+    preview = cursor.fetchall()
     if request.method == "POST":
         if request.form['submit'] == "submit_search":
             Job_Field = request.form['Job_Field']
             Search_Value = request.form['Search']
 
-        #if the search is null but user selects a field of work, it will on show posts in the field selected
+            #if the search is null but user selects a field of work, it will on show posts in the field selected
             if (Search_Value == '' and Job_Field == '5G' or Job_Field == 'Iot' or Job_Field == 'AI/Machine Learning' or Job_Field == 'RPA'
                 or Job_Field == 'Cyber Security' or Job_Field == 'Quantum Computing' or Job_Field == 'Edge Computing'
                 or Job_Field == 'Blockchain' or Job_Field == 'VR/Augmented'):
@@ -174,12 +177,14 @@ def SearchJob():
                 data = cursor.fetchall()
             # all in the search box will return all the tuples
             return render_template('StudentHomePage.html', data = data)
+
         if request.form['submit'] == "submit_apply":
-                buttonID = request.form['buttonID']
-                cursor.execute('INSERT IGNORE INTO applied (FK_Postid, FK_JobSeekerid) Values (%s, %s)', (int(buttonID), int(session['id'])))
-                conn.commit()
-                flash("You Have Successfully Applied")
-    return render_template("StudentHomePage.html")
+            buttonID = request.form['buttonID']
+            cursor.execute('INSERT IGNORE INTO applied (FK_Postid, FK_JobSeekerid) Values (%s, %s)', (int(buttonID), int(session['id'])))
+            conn.commit()
+            flash("You Have Successfully Applied")
+
+    return render_template("StudentHomePage.html", preview = preview)
 
 @app.route('/CompanyHomePage.html' , methods=['GET', 'POST'])
 @company_required
