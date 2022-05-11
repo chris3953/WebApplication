@@ -1,5 +1,5 @@
 #from crypt import method
-# from crypt import methods
+from crypt import methods
 import os
 import base64
 from flask import Flask, render_template, request, redirect, session, url_for, flash, send_from_directory
